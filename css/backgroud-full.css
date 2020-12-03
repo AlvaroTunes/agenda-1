@@ -1,0 +1,8 @@
+html {
+    background: url('../img/background.jpg');
+    background-size: cover;
+}
+
+input {
+    border-radius: 0.6rem !important;
+}
