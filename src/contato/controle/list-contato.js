@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-    $('tbody').empty()
-
     $.ajax({
         type: 'POST',
         dataType: 'JSON',
@@ -9,28 +7,29 @@ $(document).ready(function() {
         url: 'src/contato/modelo/list-contato.php',
         success: function(dados) {
 
-            var registro = ''
+            $('tbody').empty()
 
             for (var i = 0; i < dados.length; i++) {
 
-                registro += `
+                let registro = `
                     <tr>
                         <td class="text-center">${dados[i].ID}</td>
                         <td>${dados[i].NOME}</td>
                         <td class="text-center">${dados[i].TELEFONE}</td>
                         <td class="text-center">${dados[i].CELULAR}</td>
                         <td class="text-center">
-                            <button class="btn btn-info btn-sm">Visualizar</button>
-                            <button class="btn btn-primary btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Excluir</button>
+                            <button id="${dados[i].ID}" class="btn btn-primary btn-sm btn-edit">Editar</button>
+                            <button id="${dados[i].ID}" class="btn btn-danger btn-sm btn-delete">Excluir</button>
                         </td>
                     </tr>
                 `
 
+                $('tbody').append(registro)
 
             }
 
-            $('tbody').append(registro)
+            $('body').append(`<script src="src/contato/controle/view-contato.js"></script>`)
+
         }
     })
 
